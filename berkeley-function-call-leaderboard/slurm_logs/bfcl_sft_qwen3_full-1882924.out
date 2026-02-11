@@ -1,0 +1,38 @@
+AWS OFI NCCL Plugin v1.6.0 loaded for CUDA 12.6.1
+This provides network transport ONLY - NCCL library from PyTorch
+Configured for Slingshot11/CXI interconnect
+CUDA 12.6.1 loaded with compatible AWS OFI NCCL plugin v1.6.0
+Plugin provides network transport - NCCL library from PyTorch
+Use with python/miniforge3_pytorch/2.7.0 or equivalent for best compatibility
+
+The following have been reloaded with a version change:
+  1) gcc-native/13.2 => gcc-native/12.3
+
+/work/hdd/bfpp/mliu21/gorilla/berkeley-function-call-leaderboard/.venv/bin/python3
+sys.path = [
+    '/work/hdd/bfpp/mliu21/gorilla/berkeley-function-call-leaderboard',
+    '/sw/spack/v1/apps/python/3.11.9-gcc-13.2.1-ufgfz3k/lib/python311.zip',
+    '/sw/spack/v1/apps/python/3.11.9-gcc-13.2.1-ufgfz3k/lib/python3.11',
+    '/sw/spack/v1/apps/python/3.11.9-gcc-13.2.1-ufgfz3k/lib/python3.11/lib-dynload',
+    '/work/hdd/bfpp/mliu21/gorilla/berkeley-function-call-leaderboard/.venv/lib/python3.11/site-packages',
+    '/work/hdd/bfpp/mliu21/gorilla/berkeley-function-call-leaderboard/.venv/lib/python3.11/site-packages/nvidia_cutlass_dsl/python_packages',
+]
+USER_BASE: '/u/mliu21/.local' (exists)
+USER_SITE: '/u/mliu21/.local/lib/python3.11/site-packages' (exists)
+ENABLE_USER_SITE: False
+Generating results for ['Qwen/Qwen3-8B']
+Running full test cases for categories: ['multi_turn_base', 'multi_turn_long_context', 'multi_turn_miss_func', 'multi_turn_miss_param'].
+✅ All selected test cases have been previously generated for Qwen/Qwen3-8B. No new test cases to generate.
+Number of models evaluated:   0%|          | 0/1 [00:00<?, ?it/s]Number of models evaluated: 100%|██████████| 1/1 [00:13<00:00, 13.83s/it]Number of models evaluated: 100%|██████████| 1/1 [00:13<00:00, 13.83s/it]
+🦍 Model: Qwen_Qwen3-8B
+🔍 Running test: multi_turn_long_context
+✅ Test completed: multi_turn_long_context. 🎯 Accuracy: 0.00%
+🔍 Running test: multi_turn_base
+✅ Test completed: multi_turn_base. 🎯 Accuracy: 0.00%
+🔍 Running test: multi_turn_miss_func
+✅ Test completed: multi_turn_miss_func. 🎯 Accuracy: 0.00%
+🔍 Running test: multi_turn_miss_param
+✅ Test completed: multi_turn_miss_param. 🎯 Accuracy: 0.00%
+📈 Aggregating data to generate leaderboard score table...
+🏁 Evaluation completed. See /work/hdd/bfpp/mliu21/gorilla/berkeley-function-call-leaderboard/.venv/lib/python3.11/site-packages/score/data_overall.csv for overall evaluation results on BFCL V4.
+See /work/hdd/bfpp/mliu21/gorilla/berkeley-function-call-leaderboard/.venv/lib/python3.11/site-packages/score/data_live.csv, /work/hdd/bfpp/mliu21/gorilla/berkeley-function-call-leaderboard/.venv/lib/python3.11/site-packages/score/data_non_live.csv, /work/hdd/bfpp/mliu21/gorilla/berkeley-function-call-leaderboard/.venv/lib/python3.11/site-packages/score/data_multi_turn.csv, /work/hdd/bfpp/mliu21/gorilla/berkeley-function-call-leaderboard/.venv/lib/python3.11/site-packages/score/data_agentic.csv and /work/hdd/bfpp/mliu21/gorilla/berkeley-function-call-leaderboard/.venv/lib/python3.11/site-packages/score/data_format_sensitivity.csv for detailed evaluation results on each sub-section categories respectively.
