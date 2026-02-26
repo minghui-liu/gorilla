@@ -4,12 +4,10 @@
 #SBATCH --mem=64gb
 #SBATCH --account=bfpp-dtai-gh
 #SBATCH --partition=ghx4
-#SBATCH --gres=gpu:2
+#SBATCH --gres=gpu:4
 #SBATCH --job-name=bfcl_sft_qwen3_full
 #SBATCH --output=slurm_logs/%x-%j.out
 #SBATCH --time 3:00:00
-
-
 
 # export NCCL_DEBUG=INFO
 # export PYTHONFAULTHANDLER=1
@@ -27,14 +25,8 @@ source .venv/bin/activate
 which python3
 python3 -m site
 
-
-# bfcl generate \
-#   --model Qwen/Qwen3-8B \
-#   --backend vllm \
-#   --num-gpus 4 \
-#   --gpu-memory-utilization 0.9 \
-#   --test-category multi_turn
-
+# Set the project root so results are written to the correct location
+export BFCL_PROJECT_ROOT=/u/mliu21/hdd/gorilla/berkeley-function-call-leaderboard
 
 bfcl generate \
   --model Qwen/Qwen3-8B \
@@ -42,7 +34,7 @@ bfcl generate \
   --backend vllm \
   --num-gpus 4 \
   --gpu-memory-utilization 0.9 \
-  --local-model-path /u/mliu21/hdd/LLaMA-Factory/saves/qwen3-8b/full/sft
+  --local-model-path /u/mliu21/hdd/LLaMA-Factory/saves/qwen3-8b-full-sft/
 
 
 bfcl evaluate \
