@@ -44,3 +44,8 @@ berkeley-function-call-leaderboard/**/*.lock
 
 # Ignore the wandb cache:
 **/wandb/
+
+
+berkeley-function-call-leaderboard/backup/
+berkeley-function-call-leaderboard/slurm_logs/
+

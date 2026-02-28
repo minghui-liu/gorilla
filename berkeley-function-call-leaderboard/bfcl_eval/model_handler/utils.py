@@ -3,6 +3,7 @@ import builtins
 import copy
 import json
 import operator
+import os
 import re
 from functools import reduce
 from typing import TYPE_CHECKING, Callable, List, Optional, Type, Union
@@ -29,6 +30,31 @@ if TYPE_CHECKING:
     from bfcl_eval.eval_checker.multi_turn_eval.func_source_code.memory_api_metaclass import (
         MemoryAPI,
     )
+
+MULTI_TURN_SYSTEM_PROMPT_STYLE_ENV_VAR = "BFCL_MULTI_TURN_SYSTEM_PROMPT_STYLE"
+MULTI_TURN_SYSTEM_PROMPT_STYLE_ORIGINAL = "original"
+MULTI_TURN_SYSTEM_PROMPT_STYLE_SHORT = "short"
+_SUPPORTED_MULTI_TURN_SYSTEM_PROMPT_STYLES = {
+    MULTI_TURN_SYSTEM_PROMPT_STYLE_ORIGINAL,
+    MULTI_TURN_SYSTEM_PROMPT_STYLE_SHORT,
+}
+
+MULTI_TURN_SHORT_SYSTEM_PROMPT_HEADER = (
+    "You are an expert in composing functions."
+    "You are given a question and a set of possible functions. Based on the question, you will "
+    "need to make one or more function/tool calls to achieve the purpose. If none of the functions "
+    "can be used, point it out. If the given question lacks the parameters required by the function, "
+    "also point it out.\n\n"
+    "You should only return the function calls in your response.\n\n"
+    "If you decide to invoke any of the function(s), you MUST put it in the format of "
+    "[func_name1(params_name1=params_value1, params_name2=params_value2...), func_name2(params)].  "
+    "You SHOULD NOT include any other text in the response.\n\n"
+    "At each turn, you should try your best to complete the tasks requested by the user within "
+    "the current turn. Continue to output functions to call until you have fulfilled the user's "
+    "request to the best of your ability. Once you have no more functions to call, the system will "
+    "consider the current turn complete and proceed to the next turn or task.\n\n"
+    "Here is a list of functions in json format that you can invoke.\n"
+)
 
 
 def _cast_to_openai_type(properties, mapping):
@@ -370,6 +396,77 @@ def resolve_ast_by_type(value):
     return output
 
 
+def _resolve_multi_turn_system_prompt_style() -> str:
+    raw_style = os.getenv(
+        MULTI_TURN_SYSTEM_PROMPT_STYLE_ENV_VAR,
+        MULTI_TURN_SYSTEM_PROMPT_STYLE_ORIGINAL,
+    )
+    style = raw_style.strip().lower()
+    if style in _SUPPORTED_MULTI_TURN_SYSTEM_PROMPT_STYLES:
+        return style
+    return MULTI_TURN_SYSTEM_PROMPT_STYLE_ORIGINAL
+
+
+def _is_multi_turn_task(test_entry_id: str) -> bool:
+    test_category = extract_test_category_from_id(test_entry_id, remove_prereq=True)
+    return test_category.startswith("multi_turn_")
+
+
+def _build_compact_function_docs(function_docs: list[dict]) -> list[dict]:
+    compact_functions = []
+    for function_doc in function_docs:
+        if not isinstance(function_doc, dict):
+            continue
+
+        function_name = function_doc.get("name", "")
+        parameters = function_doc.get("parameters", {})
+        properties = parameters.get("properties", {}) if isinstance(parameters, dict) else {}
+        required_params = set(
+            parameters.get("required", []) if isinstance(parameters, dict) else []
+        )
+
+        compact_params = []
+        for param_name, param_meta in properties.items():
+            if not isinstance(param_meta, dict):
+                param_type = "string"
+            else:
+                param_type = param_meta.get("type", "string")
+                if isinstance(param_type, list):
+                    param_type = "|".join(str(item) for item in param_type)
+
+            compact_params.append(
+                {
+                    "name": param_name,
+                    "type": param_type,
+                    "required": param_name in required_params,
+                }
+            )
+
+        compact_functions.append(
+            {"name": function_name, "parameters": compact_params}
+        )
+    return compact_functions
+
+
+def formulate_multi_turn_short_system_prompt(function_docs: list[dict]) -> str:
+    compact_functions = _build_compact_function_docs(function_docs)
+    return MULTI_TURN_SHORT_SYSTEM_PROMPT_HEADER + json.dumps(
+        compact_functions, ensure_ascii=False, indent=2
+    )
+
+
+def _log_multi_turn_prompt_choice(
+    test_entry_id: str, selected_style: str, short_prompt_applied: bool
+) -> None:
+    # Explicit log line for auditing which prompt path is active at runtime.
+    print(
+        "[BFCL_PROMPT_STYLE] "
+        f"test_entry_id={test_entry_id} "
+        f"selected_style={selected_style} "
+        f"short_prompt_applied={short_prompt_applied}"
+    )
+
+
 # TODO: consider moving this step to pipeline instead of in each model handler
 def system_prompt_pre_processing_chat_model(
     prompts: list[dict], function_docs: list[dict], test_entry_id: str
@@ -382,9 +479,25 @@ def system_prompt_pre_processing_chat_model(
 
     prompt_format = extract_prompt_format_from_id(test_entry_id)
 
-    system_prompt = formulate_system_prompt(
-        format_sensitivity_config=prompt_format, functions=function_docs
+    is_multi_turn_task = _is_multi_turn_task(test_entry_id)
+    selected_style = _resolve_multi_turn_system_prompt_style()
+    should_use_short_prompt = (
+        is_multi_turn_task and selected_style == MULTI_TURN_SYSTEM_PROMPT_STYLE_SHORT
     )
+
+    if should_use_short_prompt:
+        system_prompt = formulate_multi_turn_short_system_prompt(function_docs)
+    else:
+        system_prompt = formulate_system_prompt(
+            format_sensitivity_config=prompt_format, functions=function_docs
+        )
+
+    if is_multi_turn_task:
+        _log_multi_turn_prompt_choice(
+            test_entry_id=test_entry_id,
+            selected_style=selected_style,
+            short_prompt_applied=should_use_short_prompt,
+        )
 
     # System prompt must be in the first position
     # If the question comes with a system prompt, append its content at the end of the chat template.

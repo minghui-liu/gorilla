@@ -39,6 +39,9 @@ cli = typer.Typer(
     cls=ExecutionOrderGroup,
 )
 
+MULTI_TURN_PROMPT_STYLE_ENV_VAR = "BFCL_MULTI_TURN_SYSTEM_PROMPT_STYLE"
+SUPPORTED_MULTI_TURN_PROMPT_STYLES = {"original", "short"}
+
 
 def handle_multiple_input(input_str):
     """
@@ -56,6 +59,41 @@ def handle_multiple_input(input_str):
         return []
 
     return [item.strip() for item in ",".join(input_str).split(",") if item.strip()]
+
+
+def configure_multi_turn_prompt_style(prompt_style_from_cli: Optional[str]) -> str:
+    """
+    Resolve and set the prompt style for multi-turn tasks.
+    Priority: CLI flag > existing env/.env value > default "original".
+    """
+    if prompt_style_from_cli is not None:
+        resolved_style = prompt_style_from_cli.strip().lower()
+        source = "cli"
+    else:
+        resolved_style = os.getenv(
+            MULTI_TURN_PROMPT_STYLE_ENV_VAR, "original"
+        ).strip().lower()
+        source = "env/.env/default"
+
+    if resolved_style not in SUPPORTED_MULTI_TURN_PROMPT_STYLES:
+        if prompt_style_from_cli is not None:
+            raise typer.BadParameter(
+                f"Invalid value for --multi-turn-system-prompt-style: '{prompt_style_from_cli}'. "
+                f"Supported values: {sorted(SUPPORTED_MULTI_TURN_PROMPT_STYLES)}"
+            )
+        print(
+            "[BFCL_PROMPT_STYLE_CONFIG] "
+            f"invalid_value={resolved_style} fallback=original"
+        )
+        resolved_style = "original"
+
+    os.environ[MULTI_TURN_PROMPT_STYLE_ENV_VAR] = resolved_style
+    print(
+        "[BFCL_PROMPT_STYLE_CONFIG] "
+        f"source={source} "
+        f"{MULTI_TURN_PROMPT_STYLE_ENV_VAR}={resolved_style}"
+    )
+    return resolved_style
 
 @cli.command()
 def version():
@@ -163,6 +201,11 @@ def generate(
         "--lora-modules",
         help='Specify the path to the LoRA modules for vLLM backend in name="path" format. Can be specified multiple times.',
     ),
+    multi_turn_system_prompt_style: Optional[str] = typer.Option(
+        None,
+        "--multi-turn-system-prompt-style",
+        help="System prompt style for multi_turn_* tasks: {original|short}. Overrides .env/env for this run.",
+    ),
 ):
     """
     Generate the LLM response for one or more models on a test-category (same as openfunctions_evaluation.py).
@@ -188,6 +231,7 @@ def generate(
         lora_modules=lora_modules,
     )
     load_dotenv(dotenv_path=DOTENV_PATH, verbose=True, override=True)  # Load the .env file
+    configure_multi_turn_prompt_style(multi_turn_system_prompt_style)
     generation_main(args)
 
 

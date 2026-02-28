@@ -1,177 +1,0 @@
-Generating results for ['Qwen/Qwen3-8B']
-Running full test cases for categories: ['multi_turn_base', 'multi_turn_long_context', 'multi_turn_miss_func', 'multi_turn_miss_param'].
-Max context length: 40960
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:53:21 [utils.py:325] 
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:53:21 [utils.py:325]        █     █     █▄   ▄█
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:53:21 [utils.py:325]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.15.1
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:53:21 [utils.py:325]   █▄█▀ █     █     █     █  model   /u/mliu21/hdd/LLaMA-Factory/saves/qwen3-8b-bfcl-full-sft/
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:53:21 [utils.py:325]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:53:21 [utils.py:325] 
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:53:21 [utils.py:261] non-default args: {'model_tag': '/u/mliu21/hdd/LLaMA-Factory/saves/qwen3-8b-bfcl-full-sft/', 'api_server_count': 1, 'port': 1053, 'model': '/u/mliu21/hdd/LLaMA-Factory/saves/qwen3-8b-bfcl-full-sft/', 'trust_remote_code': True, 'dtype': 'bfloat16', 'tensor_parallel_size': 4}
-[0;36m(APIServer pid=126201)[0;0m The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
-[0;36m(APIServer pid=126201)[0;0m The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:53:46 [model.py:541] Resolved architecture: Qwen3ForCausalLM
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:53:46 [model.py:1561] Using max model len 40960
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:54:00 [scheduler.py:226] Chunked prefill is enabled with max_num_batched_tokens=8192.
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:54:00 [vllm.py:624] Asynchronous scheduling is enabled.
-[0;36m(EngineCore_DP0 pid=127769)[0;0m INFO 02-08 23:54:14 [core.py:96] Initializing a V1 LLM engine (v0.15.1) with config: model='/u/mliu21/hdd/LLaMA-Factory/saves/qwen3-8b-bfcl-full-sft/', speculative_config=None, tokenizer='/u/mliu21/hdd/LLaMA-Factory/saves/qwen3-8b-bfcl-full-sft/', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=True, dtype=torch.bfloat16, max_seq_len=40960, download_dir=None, load_format=auto, tensor_parallel_size=4, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=/u/mliu21/hdd/LLaMA-Factory/saves/qwen3-8b-bfcl-full-sft/, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'level': None, 'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'splitting_ops': ['vllm::unified_attention', 'vllm::unified_attention_with_output', 'vllm::unified_mla_attention', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::linear_attention', 'vllm::plamo2_mamba_mixer', 'vllm::gdn_attention_core', 'vllm::kda_attention', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::unified_kv_cache_update'], 'compile_mm_encoder': False, 'compile_sizes': [], 'compile_ranges_split_points': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'eliminate_noops': True, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 512, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': True}, 'local_cache_dir': None, 'static_all_moe_layers': []}
-INFO 02-08 23:54:40 [parallel_state.py:1212] world_size=4 rank=2 local_rank=2 distributed_init_method=tcp://127.0.0.1:50485 backend=nccl
-INFO 02-08 23:54:40 [parallel_state.py:1212] world_size=4 rank=0 local_rank=0 distributed_init_method=tcp://127.0.0.1:50485 backend=nccl
-INFO 02-08 23:54:40 [parallel_state.py:1212] world_size=4 rank=3 local_rank=3 distributed_init_method=tcp://127.0.0.1:50485 backend=nccl
-INFO 02-08 23:54:40 [parallel_state.py:1212] world_size=4 rank=1 local_rank=1 distributed_init_method=tcp://127.0.0.1:50485 backend=nccl
-INFO 02-08 23:54:41 [pynccl.py:111] vLLM is using nccl==2.27.5
-WARNING 02-08 23:54:47 [symm_mem.py:107] SymmMemCommunicator: symmetric memory multicast operations are not supported.
-WARNING 02-08 23:54:47 [symm_mem.py:107] SymmMemCommunicator: symmetric memory multicast operations are not supported.
-WARNING 02-08 23:54:47 [symm_mem.py:107] SymmMemCommunicator: symmetric memory multicast operations are not supported.
-WARNING 02-08 23:54:47 [symm_mem.py:107] SymmMemCommunicator: symmetric memory multicast operations are not supported.
-INFO 02-08 23:54:47 [parallel_state.py:1423] rank 0 in world size 4 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A
-INFO 02-08 23:54:48 [parallel_state.py:1423] rank 1 in world size 4 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 1, EP rank N/A
-INFO 02-08 23:54:48 [parallel_state.py:1423] rank 2 in world size 4 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 2, EP rank N/A
-INFO 02-08 23:54:48 [parallel_state.py:1423] rank 3 in world size 4 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 3, EP rank N/A
-[0;36m(Worker_TP0 pid=128513)[0;0m INFO 02-08 23:55:10 [gpu_model_runner.py:4033] Starting to load model /u/mliu21/hdd/LLaMA-Factory/saves/qwen3-8b-bfcl-full-sft/...
-[0;36m(Worker_TP0 pid=128513)[0;0m INFO 02-08 23:55:39 [cuda.py:364] Using FLASH_ATTN attention backend out of potential backends: ('FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION')
-[0;36m(Worker_TP0 pid=128513)[0;0m 
-Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
-[0;36m(Worker_TP0 pid=128513)[0;0m 
-Loading safetensors checkpoint shards: 100% Completed | 1/1 [01:06<00:00, 66.92s/it]
-[0;36m(Worker_TP0 pid=128513)[0;0m 
-Loading safetensors checkpoint shards: 100% Completed | 1/1 [01:06<00:00, 66.92s/it]
-[0;36m(Worker_TP0 pid=128513)[0;0m 
-[0;36m(Worker_TP0 pid=128513)[0;0m INFO 02-08 23:56:48 [default_loader.py:291] Loading weights took 66.94 seconds
-[0;36m(Worker_TP0 pid=128513)[0;0m INFO 02-08 23:56:48 [gpu_model_runner.py:4130] Model loading took 3.82 GiB memory and 97.837643 seconds
-[0;36m(EngineCore_DP0 pid=127769)[0;0m INFO 02-08 23:57:48 [shm_broadcast.py:542] No available shared memory broadcast block found in 60 seconds. This typically happens when some processes are hanging or doing some time-consuming work (e.g. compilation, weight/kv cache quantization).
-[0;36m(Worker_TP0 pid=128513)[0;0m INFO 02-08 23:57:58 [backends.py:812] Using cache directory: /u/mliu21/.cache/vllm/torch_compile_cache/36fde4cc89/rank_0_0/backbone for vLLM's torch.compile
-[0;36m(Worker_TP0 pid=128513)[0;0m INFO 02-08 23:57:58 [backends.py:872] Dynamo bytecode transform time: 69.78 s
-[0;36m(Worker_TP1 pid=128514)[0;0m INFO 02-08 23:58:23 [backends.py:302] Cache the graph of compile range (1, 8192) for later use
-[0;36m(Worker_TP2 pid=128515)[0;0m INFO 02-08 23:58:23 [backends.py:302] Cache the graph of compile range (1, 8192) for later use
-[0;36m(Worker_TP0 pid=128513)[0;0m INFO 02-08 23:58:23 [backends.py:302] Cache the graph of compile range (1, 8192) for later use
-[0;36m(Worker_TP3 pid=128516)[0;0m INFO 02-08 23:58:23 [backends.py:302] Cache the graph of compile range (1, 8192) for later use
-[0;36m(Worker_TP0 pid=128513)[0;0m INFO 02-08 23:58:35 [backends.py:319] Compiling a graph for compile range (1, 8192) takes 33.46 s
-[0;36m(Worker_TP0 pid=128513)[0;0m INFO 02-08 23:58:35 [monitor.py:34] torch.compile takes 103.23 s in total
-[0;36m(Worker_TP0 pid=128513)[0;0m INFO 02-08 23:58:39 [gpu_worker.py:356] Available KV cache memory: 73.05 GiB
-[0;36m(EngineCore_DP0 pid=127769)[0;0m INFO 02-08 23:58:39 [kv_cache_utils.py:1307] GPU KV cache size: 2,127,392 tokens
-[0;36m(EngineCore_DP0 pid=127769)[0;0m INFO 02-08 23:58:39 [kv_cache_utils.py:1312] Maximum concurrency for 40,960 tokens per request: 51.94x
-[0;36m(Worker_TP2 pid=128515)[0;0m 2026-02-08 23:58:39,716 - INFO - autotuner.py:256 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
-[0;36m(Worker_TP0 pid=128513)[0;0m 2026-02-08 23:58:39,716 - INFO - autotuner.py:256 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
-[0;36m(Worker_TP1 pid=128514)[0;0m 2026-02-08 23:58:39,716 - INFO - autotuner.py:256 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
-[0;36m(Worker_TP3 pid=128516)[0;0m 2026-02-08 23:58:39,717 - INFO - autotuner.py:256 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
-[0;36m(Worker_TP0 pid=128513)[0;0m 2026-02-08 23:58:39,988 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process ends
-[0;36m(Worker_TP1 pid=128514)[0;0m 2026-02-08 23:58:39,988 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process ends
-[0;36m(Worker_TP3 pid=128516)[0;0m 2026-02-08 23:58:39,990 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process ends
-[0;36m(Worker_TP2 pid=128515)[0;0m 2026-02-08 23:58:39,990 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process ends
-[0;36m(Worker_TP0 pid=128513)[0;0m 
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   0%|          | 0/51 [00:00<?, ?it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   2%|▏         | 1/51 [00:00<00:16,  2.99it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   6%|▌         | 3/51 [00:00<00:06,  7.24it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  10%|▉         | 5/51 [00:00<00:04,  9.65it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  14%|█▎        | 7/51 [00:00<00:03, 11.07it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  18%|█▊        | 9/51 [00:00<00:03, 11.83it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  22%|██▏       | 11/51 [00:01<00:03, 12.44it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  25%|██▌       | 13/51 [00:01<00:02, 12.79it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  29%|██▉       | 15/51 [00:01<00:02, 13.12it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  33%|███▎      | 17/51 [00:01<00:03, 11.01it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  37%|███▋      | 19/51 [00:01<00:02, 11.67it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  41%|████      | 21/51 [00:01<00:02, 12.23it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  45%|████▌     | 23/51 [00:02<00:02, 12.57it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  49%|████▉     | 25/51 [00:02<00:02, 12.65it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  53%|█████▎    | 27/51 [00:02<00:01, 12.89it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  57%|█████▋    | 29/51 [00:02<00:01, 13.03it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  61%|██████    | 31/51 [00:02<00:01, 13.11it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  65%|██████▍   | 33/51 [00:02<00:01, 13.04it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  69%|██████▊   | 35/51 [00:02<00:01, 12.98it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  73%|███████▎  | 37/51 [00:03<00:01, 12.91it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  76%|███████▋  | 39/51 [00:03<00:00, 12.81it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  80%|████████  | 41/51 [00:03<00:00, 12.82it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  84%|████████▍ | 43/51 [00:03<00:00, 12.86it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  88%|████████▊ | 45/51 [00:03<00:00, 13.00it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  92%|█████████▏| 47/51 [00:03<00:00, 12.94it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  96%|█████████▌| 49/51 [00:04<00:00, 13.06it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE): 100%|██████████| 51/51 [00:04<00:00, 11.06it/s]
-Capturing CUDA graphs (mixed prefill-decode, PIECEWISE): 100%|██████████| 51/51 [00:04<00:00, 11.92it/s]
-[0;36m(Worker_TP0 pid=128513)[0;0m 
-Capturing CUDA graphs (decode, FULL):   0%|          | 0/51 [00:00<?, ?it/s]
-Capturing CUDA graphs (decode, FULL):   2%|▏         | 1/51 [00:00<00:13,  3.69it/s]
-Capturing CUDA graphs (decode, FULL):   6%|▌         | 3/51 [00:00<00:06,  7.87it/s]
-Capturing CUDA graphs (decode, FULL):  10%|▉         | 5/51 [00:00<00:04, 10.87it/s]
-Capturing CUDA graphs (decode, FULL):  14%|█▎        | 7/51 [00:00<00:03, 13.03it/s]
-Capturing CUDA graphs (decode, FULL):  18%|█▊        | 9/51 [00:00<00:02, 14.50it/s]
-Capturing CUDA graphs (decode, FULL):  22%|██▏       | 11/51 [00:00<00:02, 15.49it/s]
-Capturing CUDA graphs (decode, FULL):  25%|██▌       | 13/51 [00:00<00:02, 16.18it/s]
-Capturing CUDA graphs (decode, FULL):  29%|██▉       | 15/51 [00:01<00:02, 16.97it/s]
-Capturing CUDA graphs (decode, FULL):  33%|███▎      | 17/51 [00:01<00:01, 17.34it/s]
-Capturing CUDA graphs (decode, FULL):  37%|███▋      | 19/51 [00:01<00:01, 17.40it/s]
-Capturing CUDA graphs (decode, FULL):  41%|████      | 21/51 [00:01<00:01, 17.42it/s]
-Capturing CUDA graphs (decode, FULL):  45%|████▌     | 23/51 [00:01<00:01, 17.47it/s]
-Capturing CUDA graphs (decode, FULL):  49%|████▉     | 25/51 [00:01<00:01, 17.49it/s]
-Capturing CUDA graphs (decode, FULL):  53%|█████▎    | 27/51 [00:01<00:01, 17.52it/s]
-Capturing CUDA graphs (decode, FULL):  57%|█████▋    | 29/51 [00:01<00:01, 17.56it/s]
-Capturing CUDA graphs (decode, FULL):  61%|██████    | 31/51 [00:02<00:01, 17.49it/s]
-Capturing CUDA graphs (decode, FULL):  65%|██████▍   | 33/51 [00:02<00:01, 17.50it/s]
-Capturing CUDA graphs (decode, FULL):  69%|██████▊   | 35/51 [00:02<00:00, 17.49it/s]
-Capturing CUDA graphs (decode, FULL):  73%|███████▎  | 37/51 [00:02<00:00, 17.47it/s]
-Capturing CUDA graphs (decode, FULL):  76%|███████▋  | 39/51 [00:02<00:00, 17.45it/s]
-Capturing CUDA graphs (decode, FULL):  80%|████████  | 41/51 [00:02<00:00, 17.36it/s]
-Capturing CUDA graphs (decode, FULL):  84%|████████▍ | 43/51 [00:02<00:00, 17.32it/s]
-Capturing CUDA graphs (decode, FULL):  88%|████████▊ | 45/51 [00:02<00:00, 17.37it/s]
-Capturing CUDA graphs (decode, FULL):  92%|█████████▏| 47/51 [00:02<00:00, 17.33it/s]
-Capturing CUDA graphs (decode, FULL):  96%|█████████▌| 49/51 [00:03<00:00, 17.29it/s]
-Capturing CUDA graphs (decode, FULL): 100%|██████████| 51/51 [00:03<00:00, 17.27it/s]
-Capturing CUDA graphs (decode, FULL): 100%|██████████| 51/51 [00:03<00:00, 16.14it/s]
-[0;36m(Worker_TP0 pid=128513)[0;0m INFO 02-08 23:58:47 [custom_all_reduce.py:216] Registering 7446 cuda graph addresses
-[0;36m(Worker_TP2 pid=128515)[0;0m INFO 02-08 23:58:47 [custom_all_reduce.py:216] Registering 7446 cuda graph addresses
-[0;36m(Worker_TP3 pid=128516)[0;0m INFO 02-08 23:58:47 [custom_all_reduce.py:216] Registering 7446 cuda graph addresses
-[0;36m(Worker_TP1 pid=128514)[0;0m INFO 02-08 23:58:47 [custom_all_reduce.py:216] Registering 7446 cuda graph addresses
-[0;36m(Worker_TP0 pid=128513)[0;0m INFO 02-08 23:58:48 [gpu_model_runner.py:5063] Graph capturing finished in 8 secs, took 0.36 GiB
-[0;36m(EngineCore_DP0 pid=127769)[0;0m INFO 02-08 23:58:48 [core.py:272] init engine (profile, create kv cache, warmup model) took 119.81 seconds
-[0;36m(EngineCore_DP0 pid=127769)[0;0m INFO 02-08 23:58:49 [vllm.py:624] Asynchronous scheduling is enabled.
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:52 [api_server.py:665] Supported tasks: ['generate']
-[0;36m(APIServer pid=126201)[0;0m WARNING 02-08 23:58:52 [model.py:1371] Default vLLM sampling parameters have been overridden by the model's `generation_config.json`: `{'temperature': 0.6, 'top_k': 20, 'top_p': 0.95}`. If this is not intended, please relaunch vLLM instance with `--generation-config vllm`.
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:52 [serving.py:177] Warming up chat template processing...
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [hf.py:310] Detected the chat template content format to be 'string'. You can set `--chat-template-content-format` to override this.
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [serving.py:212] Chat template warmup completed in 293.0ms
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [api_server.py:946] Starting vLLM API server 0 on http://0.0.0.0:1053
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:38] Available routes are:
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /openapi.json, Methods: GET, HEAD
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /docs, Methods: GET, HEAD
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /docs/oauth2-redirect, Methods: GET, HEAD
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /redoc, Methods: GET, HEAD
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /scale_elastic_ep, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /is_scaling_elastic_ep, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /tokenize, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /detokenize, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /inference/v1/generate, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /pause, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /resume, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /is_paused, Methods: GET
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /metrics, Methods: GET
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /health, Methods: GET
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /v1/chat/completions, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /v1/chat/completions/render, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /v1/responses, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /v1/responses/{response_id}, Methods: GET
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /v1/responses/{response_id}/cancel, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /v1/audio/transcriptions, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /v1/audio/translations, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /v1/completions, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /v1/completions/render, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /v1/messages, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /v1/models, Methods: GET
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /load, Methods: GET
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /version, Methods: GET
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /ping, Methods: GET
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /ping, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /invocations, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /classify, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /v1/embeddings, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /score, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /v1/score, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /rerank, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /v1/rerank, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /v2/rerank, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO 02-08 23:58:53 [launcher.py:46] Route: /pooling, Methods: POST
-[0;36m(APIServer pid=126201)[0;0m INFO:     Started server process [126201]
-[0;36m(APIServer pid=126201)[0;0m INFO:     Waiting for application startup.
-[0;36m(APIServer pid=126201)[0;0m INFO:     Application startup complete.
-[0;36m(APIServer pid=126201)[0;0m INFO:     127.0.0.1:60092 - "GET /v1/models HTTP/1.1" 200 OK
-server is ready!
-Generating results for Qwen/Qwen3-8B:   0%|          | 0/800 [00:00<?, ?it/s]Generating results for Qwen/Qwen3-8B:   0%|          | 1/800 [01:13<16:24:39, 73.94s/it]Generating results for Qwen/Qwen3-8B:   0%|          | 2/800 [01:14<7:47:20, 35.14s/it] Generating results for Qwen/Qwen3-8B:   0%|          | 3/800 [02:27<10:52:04, 49.09s/it]Generating results for Qwen/Qwen3-8B:   1%|          | 5/800 [02:28<6:00:06, 27.18s/it] Generating results for Qwen/Qwen3-8B:   1%|          | 7/800 [02:28<4:00:19, 18.18s/it]Generating results for Qwen/Qwen3-8B:   1%|          | 8/800 [02:28<3:23:18, 15.40s/it]Generating results for Qwen/Qwen3-8B:   2%|▏         | 14/800 [02:29<1:39:07,  7.57s/it]Generating results for Qwen/Qwen3-8B:   2%|▏         | 17/800 [02:29<1:17:13,  5.92s/it]Generating results for Qwen/Qwen3-8B:   2%|▏         | 19/800 [02:29<1:06:23,  5.10s/it]Generating results for Qwen/Qwen3-8B:   3%|▎         | 24/800 [02:29<47:35,  3.68s/it]  Generating results for Qwen/Qwen3-8B:   3%|▎         | 25/800 [02:39<47:31,  3.68s/it]Generating results for Qwen/Qwen3-8B:   3%|▎         | 26/800 [03:47<1:37:53,  7.59s/it]Generating results for Qwen/Qwen3-8B:   3%|▎         | 27/800 [03:48<1:32:44,  7.20s/it]Generating results for Qwen/Qwen3-8B:   4%|▍         | 32/800 [03:48<1:09:47,  5.45s/it]Generating results for Qwen/Qwen3-8B:   4%|▍         | 35/800 [03:49<1:00:14,  4.72s/it]Generating results for Qwen/Qwen3-8B:   5%|▌         | 41/800 [03:49<45:43,  3.61s/it]  Generating results for Qwen/Qwen3-8B:   6%|▌         | 48/800 [03:50<34:46,  2.77s/it]Generating results for Qwen/Qwen3-8B:   7%|▋         | 58/800 [03:50<25:04,  2.03s/it]Generating results for Qwen/Qwen3-8B:   8%|▊         | 60/800 [04:09<25:00,  2.03s/it]Generating results for Qwen/Qwen3-8B:   8%|▊         | 61/800 [05:14<51:37,  4.19s/it]Generating results for Qwen/Qwen3-8B:   8%|▊         | 63/800 [05:15<48:44,  3.97s/it]Generating results for Qwen/Qwen3-8B:   9%|▉         | 71/800 [05:16<38:44,  3.19s/it]Generating results for Qwen/Qwen3-8B:  10%|▉         | 76/800 [05:16<33:45,  2.80s/it]Generating results for Qwen/Qwen3-8B:  10%|▉         | 79/800 [05:17<31:08,  2.59s/it]Generating results for Qwen/Qwen3-8B:  10%|█         | 82/800 [05:17<28:38,  2.39s/it]Generating results for Qwen/Qwen3-8B:  11%|█         | 89/800 [05:17<23:37,  1.99s/it]Generating results for Qwen/Qwen3-8B:  11%|█▏        | 90/800 [05:29<23:35,  1.99s/it]Generating results for Qwen/Qwen3-8B:  11%|█▏        | 91/800 [06:37<46:32,  3.94s/it]Generating results for Qwen/Qwen3-8B:  12%|█▏        | 99/800 [06:38<37:34,  3.22s/it]Generating results for Qwen/Qwen3-8B:  13%|█▎        | 103/800 [06:38<33:59,  2.93s/it]Generating results for Qwen/Qwen3-8B:  13%|█▎        | 107/800 [06:38<30:40,  2.66s/it]Generating results for Qwen/Qwen3-8B:  14%|█▍        | 114/800 [06:49<30:22,  2.66s/it]Generating results for Qwen/Qwen3-8B:  14%|█▍        | 115/800 [07:54<43:51,  3.84s/it]Generating results for Qwen/Qwen3-8B:  14%|█▍        | 116/800 [07:56<43:15,  3.79s/it]Generating results for Qwen/Qwen3-8B:  15%|█▌        | 123/800 [07:56<36:16,  3.22s/it]Generating results for Qwen/Qwen3-8B:  16%|█▌        | 127/800 [07:57<32:54,  2.93s/it]Generating results for Qwen/Qwen3-8B:  17%|█▋        | 133/800 [07:57<28:27,  2.56s/it]Generating results for Qwen/Qwen3-8B:  17%|█▋        | 135/800 [08:09<28:22,  2.56s/it]Generating results for Qwen/Qwen3-8B:  17%|█▋        | 136/800 [09:19<46:46,  4.23s/it]Generating results for Qwen/Qwen3-8B:  18%|█▊        | 142/800 [09:20<40:32,  3.70s/it]Generating results for Qwen/Qwen3-8B:  18%|█▊        | 146/800 [09:22<37:10,  3.41s/it]Generating results for Qwen/Qwen3-8B:  19%|█▉        | 150/800 [09:22<33:49,  3.12s/it]Generating results for Qwen/Qwen3-8B:  19%|█▉        | 153/800 [09:23<31:30,  2.92s/it]Generating results for Qwen/Qwen3-8B:  20%|█▉        | 156/800 [09:23<29:11,  2.72s/it]Generating results for Qwen/Qwen3-8B:  20%|█▉        | 159/800 [09:39<29:03,  2.72s/it]Generating results for Qwen/Qwen3-8B:  20%|██        | 160/800 [10:49<47:58,  4.50s/it]Generating results for Qwen/Qwen3-8B:  20%|██        | 163/800 [10:50<44:33,  4.20s/it]Generating results for Qwen/Qwen3-8B:  21%|██        | 166/800 [10:50<41:04,  3.89s/it]Generating results for Qwen/Qwen3-8B:  21%|██        | 169/800 [10:51<37:54,  3.61s/it]Generating results for Qwen/Qwen3-8B:  22%|██▏       | 174/800 [10:51<32:59,  3.16s/it]Generating results for Qwen/Qwen3-8B:  22%|██▏       | 178/800 [10:52<29:33,  2.85s/it]Generating results for Qwen/Qwen3-8B:  23%|██▎       | 184/800 [10:52<25:07,  2.45s/it]Generating results for Qwen/Qwen3-8B:  24%|██▎       | 188/800 [10:52<22:37,  2.22s/it]Generating results for Qwen/Qwen3-8B:  24%|██▍       | 190/800 [11:09<22:33,  2.22s/it]Generating results for Qwen/Qwen3-8B:  24%|██▍       | 191/800 [12:17<42:04,  4.15s/it]Generating results for Qwen/Qwen3-8B:  24%|██▍       | 195/800 [12:18<37:58,  3.77s/it]Generating results for Qwen/Qwen3-8B:  25%|██▌       | 202/800 [12:18<31:32,  3.17s/it]Generating results for Qwen/Qwen3-8B:  26%|██▌       | 205/800 [12:19<29:16,  2.95s/it]Generating results for Qwen/Qwen3-8B:  26%|██▋       | 212/800 [12:19<24:28,  2.50s/it]Generating results for Qwen/Qwen3-8B:  27%|██▋       | 216/800 [12:19<22:10,  2.28s/it]Generating results for Qwen/Qwen3-8B:  27%|██▋       | 218/800 [12:29<22:05,  2.28s/it]Generating results for Qwen/Qwen3-8B:  27%|██▋       | 219/800 [13:41<39:00,  4.03s/it]Generating results for Qwen/Qwen3-8B:  28%|██▊       | 227/800 [13:42<32:00,  3.35s/it]Generating results for Qwen/Qwen3-8B:  29%|██▉       | 233/800 [13:42<27:47,  2.94s/it]Generating results for Qwen/Qwen3-8B:  30%|██▉       | 236/800 [13:43<25:55,  2.76s/it]Generating results for Qwen/Qwen3-8B:  30%|███       | 240/800 [13:43<23:31,  2.52s/it]Generating results for Qwen/Qwen3-8B:  30%|███       | 244/800 [13:43<21:19,  2.30s/it]Generating results for Qwen/Qwen3-8B:  32%|███▏      | 252/800 [13:44<17:36,  1.93s/it]Generating results for Qwen/Qwen3-8B:  32%|███▏      | 256/800 [13:59<17:29,  1.93s/it]Generating results for Qwen/Qwen3-8B:  32%|███▏      | 257/800 [15:27<34:52,  3.85s/it]Generating results for Qwen/Qwen3-8B:  33%|███▎      | 262/800 [15:27<31:07,  3.47s/it]Generating results for Qwen/Qwen3-8B:  34%|███▎      | 269/800 [15:28<26:33,  3.00s/it]Generating results for Qwen/Qwen3-8B:  34%|███▍      | 273/800 [15:29<24:21,  2.77s/it]Generating results for Qwen/Qwen3-8B:  34%|███▍      | 276/800 [15:29<22:44,  2.60s/it]Generating results for Qwen/Qwen3-8B:  35%|███▍      | 279/800 [15:29<21:12,  2.44s/it]Generating results for Qwen/Qwen3-8B:  35%|███▌      | 281/800 [15:39<21:07,  2.44s/it]Generating results for Qwen/Qwen3-8B:  35%|███▌      | 282/800 [19:11<1:02:49,  7.28s/it]Generating results for Qwen/Qwen3-8B:  36%|███▌      | 286/800 [19:13<56:58,  6.65s/it]  Generating results for Qwen/Qwen3-8B:  36%|███▌      | 289/800 [19:29<55:47,  6.55s/it]Generating results for Qwen/Qwen3-8B:  36%|███▋      | 292/800 [19:29<51:29,  6.08s/it]Generating results for Qwen/Qwen3-8B:  37%|███▋      | 295/800 [19:29<47:28,  5.64s/it]Generating results for Qwen/Qwen3-8B:  37%|███▋      | 299/800 [19:30<42:27,  5.09s/it]Generating results for Qwen/Qwen3-8B:  38%|███▊      | 302/800 [19:30<39:01,  4.70s/it]Generating results for Qwen/Qwen3-8B:  38%|███▊      | 302/800 [19:50<39:01,  4.70s/it]Generating results for Qwen/Qwen3-8B:  38%|███▊      | 303/800 [20:55<57:18,  6.92s/it]Generating results for Qwen/Qwen3-8B:  40%|████      | 322/800 [20:55<34:51,  4.38s/it]Generating results for Qwen/Qwen3-8B:  40%|████      | 324/800 [21:10<34:43,  4.38s/it]Generating results for Qwen/Qwen3-8B:  41%|████      | 325/800 [22:23<46:36,  5.89s/it]Generating results for Qwen/Qwen3-8B:  41%|████▏     | 330/800 [22:23<41:31,  5.30s/it]Generating results for Qwen/Qwen3-8B:  42%|████▏     | 334/800 [22:24<37:49,  4.87s/it]Generating results for Qwen/Qwen3-8B:  42%|████▏     | 338/800 [22:24<34:26,  4.47s/it]Generating results for Qwen/Qwen3-8B:  43%|████▎     | 342/800 [22:25<31:18,  4.10s/it]Generating results for Qwen/Qwen3-8B:  43%|████▎     | 346/800 [22:25<28:25,  3.76s/it]Generating results for Qwen/Qwen3-8B:  44%|████▍     | 350/800 [22:26<25:46,  3.44s/it]Generating results for Qwen/Qwen3-8B:  44%|████▍     | 352/800 [22:40<25:40,  3.44s/it]Generating results for Qwen/Qwen3-8B:  44%|████▍     | 353/800 [23:51<38:14,  5.13s/it]Generating results for Qwen/Qwen3-8B:  44%|████▍     | 355/800 [23:51<36:17,  4.89s/it]Generating results for Qwen/Qwen3-8B:  45%|████▍     | 358/800 [23:51<33:26,  4.54s/it]Generating results for Qwen/Qwen3-8B:  45%|████▌     | 361/800 [23:52<30:45,  4.20s/it]Generating results for Qwen/Qwen3-8B:  46%|████▌     | 364/800 [23:52<28:16,  3.89s/it]Generating results for Qwen/Qwen3-8B:  46%|████▌     | 367/800 [23:52<25:53,  3.59s/it]Generating results for Qwen/Qwen3-8B:  46%|████▋     | 370/800 [23:53<23:44,  3.31s/it]Generating results for Qwen/Qwen3-8B:  47%|████▋     | 373/800 [23:53<21:40,  3.05s/it]Generating results for Qwen/Qwen3-8B:  47%|████▋     | 375/800 [24:10<21:34,  3.05s/it]Generating results for Qwen/Qwen3-8B:  47%|████▋     | 376/800 [25:50<42:47,  6.06s/it]Generating results for Qwen/Qwen3-8B:  47%|████▋     | 379/800 [25:51<39:09,  5.58s/it]Generating results for Qwen/Qwen3-8B:  48%|████▊     | 382/800 [25:52<35:41,  5.12s/it]Generating results for Qwen/Qwen3-8B:  48%|████▊     | 385/800 [25:53<32:28,  4.70s/it]Generating results for Qwen/Qwen3-8B:  48%|████▊     | 387/800 [25:53<30:23,  4.42s/it]Generating results for Qwen/Qwen3-8B:  49%|████▊     | 389/800 [25:53<28:22,  4.14s/it]Generating results for Qwen/Qwen3-8B:  49%|████▉     | 391/800 [25:54<26:24,  3.88s/it]Generating results for Qwen/Qwen3-8B:  49%|████▉     | 393/800 [25:57<25:12,  3.72s/it]Generating results for Qwen/Qwen3-8B:  49%|████▉     | 393/800 [26:10<25:12,  3.72s/it]Generating results for Qwen/Qwen3-8B:  49%|████▉     | 394/800 [30:27<1:31:10, 13.47s/it]Generating results for Qwen/Qwen3-8B:  50%|████▉     | 396/800 [30:27<1:23:57, 12.47s/it]Generating results for Qwen/Qwen3-8B:  50%|████▉     | 398/800 [30:27<1:17:09, 11.52s/it]Generating results for Qwen/Qwen3-8B:  50%|█████     | 401/800 [30:28<1:07:55, 10.22s/it]Generating results for Qwen/Qwen3-8B:  50%|█████     | 403/800 [30:28<1:02:24,  9.43s/it]Generating results for Qwen/Qwen3-8B:  51%|█████     | 405/800 [30:28<57:12,  8.69s/it]  Generating results for Qwen/Qwen3-8B:  51%|█████▏    | 411/800 [30:28<44:34,  6.88s/it]Generating results for Qwen/Qwen3-8B:  52%|█████▏    | 414/800 [30:29<39:45,  6.18s/it]Generating results for Qwen/Qwen3-8B:  52%|█████▏    | 416/800 [30:29<36:48,  5.75s/it]Generating results for Qwen/Qwen3-8B:  52%|█████▏    | 419/800 [30:30<32:40,  5.14s/it]Generating results for Qwen/Qwen3-8B:  52%|█████▎    | 420/800 [30:50<32:35,  5.14s/it]Generating results for Qwen/Qwen3-8B:  53%|█████▎    | 421/800 [32:01<51:17,  8.12s/it]Generating results for Qwen/Qwen3-8B:  55%|█████▌    | 443/800 [32:01<25:30,  4.29s/it]Generating results for Qwen/Qwen3-8B:  56%|█████▌    | 446/800 [32:20<25:17,  4.29s/it]
